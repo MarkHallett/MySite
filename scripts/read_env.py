@@ -9,16 +9,11 @@ import getopt
 import ConfigParser
 
 def run(env):
-    #file_name = '/sblfront/tmp/halletm/dev/env_vars/simple/sblenv.dat'
-    file_name = './env.dat' # %(env)
-    #print '**** using ',file_name
-    #return
-
+    file_name = './env.dat'
     parser = ConfigParser.SafeConfigParser()
-    #file_name = '%s.dat' %(env)
+
+    # read env name/values from the dat file
     parser.read(file_name)
-
-
     env_vars = {}
     for n, v in parser.items(env):
         n = n.upper()
@@ -26,6 +21,7 @@ def run(env):
 
     names = env_vars.keys()
     names.sort()
+    
     for n in names:
         v = env_vars[n]
         print 'export %s=%s' %(n,v)
@@ -34,7 +30,10 @@ def run(env):
 # ############################################
 
 if __name__ == '__main__':
-
-    env = 'PROD'
+    env = 'DEV'
+    opts, args = getopt.getopt(sys.argv[1:],"e:")
+    for o,a in opts:
+      if o == "-e":
+            env = a
 
     run(env)
