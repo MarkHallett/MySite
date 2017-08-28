@@ -1,7 +1,8 @@
 #  #! /usr/local/bin/python
-# read_envs.py (v2)
+# read_env.py 
 
-# Pre getenv read of envvars
+# Do not put print statements in this script
+
 
 import os
 import sys
@@ -9,6 +10,7 @@ import getopt
 import ConfigParser
 
 def run(env):
+    #print 'setting for ', env
     file_name = './env.dat'
     parser = ConfigParser.SafeConfigParser()
 
@@ -21,7 +23,7 @@ def run(env):
 
     names = env_vars.keys()
     names.sort()
-    
+
     for n in names:
         v = env_vars[n]
         print 'export %s=%s' %(n,v)
@@ -30,7 +32,6 @@ def run(env):
 # ############################################
 
 if __name__ == '__main__':
-    env = 'DEV'
     opts, args = getopt.getopt(sys.argv[1:],"e:")
     for o,a in opts:
       if o == "-e":
