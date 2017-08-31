@@ -1,0 +1,46 @@
+2017-06-26 20:15:24,963 get_pub_ccy  INFO     Start
+2017-06-26 20:15:24,964 get_pub_ccy  INFO     EUR/GBP
+2017-06-26 20:15:25,538 get_pub_ccy  INFO     2017-06-26 20:15:25.538340,0.75
+2017-06-26 20:15:25,538 get_pub_ccy  INFO     End
+2017-06-26 20:15:25,708 get_pub_ccy  INFO     Start
+2017-06-26 20:15:25,708 get_pub_ccy  INFO     GBP/USD
+2017-06-26 20:15:25,996 get_pub_ccy  INFO     2017-06-26 20:15:25.996475,1.66
+2017-06-26 20:15:25,996 get_pub_ccy  INFO     End
+2017-06-26 20:15:26,161 get_pub_ccy  INFO     Start
+2017-06-26 20:15:26,161 get_pub_ccy  INFO     USD/EUR
+2017-06-26 20:15:26,527 get_pub_ccy  INFO     2017-06-26 20:15:26.527409,1.55
+2017-06-26 20:15:26,527 get_pub_ccy  INFO     End
+2017-06-26 20:16:20,473 get_pub_ccy  INFO     Start
+2017-06-26 20:16:20,474 get_pub_ccy  INFO     EUR/GBP
+2017-06-26 20:16:21,021 get_pub_ccy  INFO     2017-06-26 20:16:21.021832,0.75
+2017-06-26 20:16:21,022 get_pub_ccy  INFO     End
+2017-06-26 20:16:21,272 get_pub_ccy  INFO     Start
+2017-06-26 20:16:21,272 get_pub_ccy  INFO     GBP/USD
+2017-06-26 20:16:21,727 get_pub_ccy  INFO     2017-06-26 20:16:21.727369,1.66
+2017-06-26 20:16:21,727 get_pub_ccy  INFO     End
+2017-06-26 20:16:21,914 get_pub_ccy  INFO     Start
+2017-06-26 20:16:21,914 get_pub_ccy  INFO     USD/EUR
+2017-06-26 20:16:22,339 get_pub_ccy  INFO     2017-06-26 20:16:22.339814,1.55
+2017-06-26 20:16:22,340 get_pub_ccy  INFO     End
+2017-06-26 20:29:37,059 get_pub_ccy  INFO     Start
+2017-06-26 20:29:37,059 get_pub_ccy  INFO     EUR/GBP
+2017-06-26 20:29:38,066 get_pub_ccy  INFO     2017-06-26 20:29:38.066790,0.75
+2017-06-26 20:29:38,067 get_pub_ccy  INFO     End
+2017-06-26 20:29:38,194 get_pub_ccy  INFO     Start
+2017-06-26 20:29:38,195 get_pub_ccy  INFO     GBP/USD
+2017-06-26 20:29:38,638 get_pub_ccy  INFO     2017-06-26 20:29:38.638706,1.66
+2017-06-26 20:29:38,639 get_pub_ccy  INFO     End
+2017-06-26 20:29:38,754 get_pub_ccy  INFO     Start
+2017-06-26 20:29:38,754 get_pub_ccy  INFO     USD/EUR
+2017-06-26 20:29:39,152 get_pub_ccy  INFO     2017-06-26 20:29:39.152517,1.55
+2017-06-26 20:29:39,152 get_pub_ccy  INFO     End
+2017-06-26 20:58:36,932 get_pub_ccy  INFO     Start
+2017-06-26 20:58:36,932 get_pub_ccy  INFO     EUR/GBP
+2017-06-26 20:58:37,562 get_pub_ccy  INFO     2017-06-26 20:58:37.562528,0.75
+2017-06-26 20:58:37,563 get_pub_ccy  INFO     End
+2017-06-26 20:58:37,680 get_pub_ccy  INFO     Start
+2017-06-26 20:58:37,681 get_pub_ccy  INFO     GBP/USD
+2017-06-26 20:58:38,032 get_pub_ccy  INFO     2017-06-26 20:58:38.032235,1.66
+2017-06-26 20:58:38,032 get_pub_ccy  INFO     End
+2017-06-26 20:58:38,149 get_pub_ccy  INFO     Start
+2017-06-26 20:58:38,149 get_pub_ccy  INFO     USD/EUR
