@@ -1,0 +1,39 @@
+2017-09-01 20:47:42,971 get_pub_ccy  INFO     Start
+2017-09-01 20:47:42,971 get_pub_ccy  INFO     No ccy given, running as a test
+2017-09-01 20:48:43,733 get_pub_ccy  INFO     Start
+2017-09-01 20:48:43,734 get_pub_ccy  INFO     No ccy given, running as a test
+2017-09-01 20:48:43,734 get_pub_ccy  ERROR    integer division or modulo by zero
+Traceback (most recent call last):
+  File "../get_pub_ccy/get_pub_ccy.py", line 30, in get_rate
+    1/0
+ZeroDivisionError: integer division or modulo by zero
+2017-09-01 20:49:33,571 get_pub_ccy  INFO     Start
+2017-09-01 20:49:33,571 get_pub_ccy  INFO     No ccy given, running as a test
+2017-09-01 20:49:33,571 get_pub_ccy  ERROR    integer division or modulo by zero
+Traceback (most recent call last):
+  File "get_pub_ccy.py", line 30, in get_rate
+    1/0
+ZeroDivisionError: integer division or modulo by zero
+2017-09-01 20:49:46,854 get_pub_ccy  INFO     Start
+2017-09-01 20:49:46,854 get_pub_ccy  INFO     No ccy given, running as a test
+2017-09-01 20:49:47,290 get_pub_ccy  INFO     HTTP Error
+2017-09-01 20:49:47,713 get_pub_ccy  INFO     HTTP Error
+2017-09-01 20:49:48,515 get_pub_ccy  INFO     HTTP Error
+2017-09-01 20:49:48,902 get_pub_ccy  INFO     HTTP Error
+2017-09-01 20:49:49,696 get_pub_ccy  INFO     End
+2017-09-01 20:50:12,389 get_pub_ccy  INFO     Start
+2017-09-01 20:50:12,390 get_pub_ccy  INFO     No ccy given, running as a test
+2017-09-01 20:50:12,878 get_pub_ccy  DEBUG    HTTP Error
+2017-09-01 20:50:13,282 get_pub_ccy  DEBUG    HTTP Error
+2017-09-01 20:50:14,113 get_pub_ccy  DEBUG    HTTP Error
+2017-09-01 20:50:14,922 get_pub_ccy  INFO     End
+2017-09-01 20:51:23,289 get_pub_ccy  INFO     Start
+2017-09-01 20:51:23,289 get_pub_ccy  INFO     No ccy given, running as a test
+2017-09-01 20:51:23,719 get_pub_ccy  DEBUG    HTTP Error
+2017-09-01 20:51:24,554 get_pub_ccy  DEBUG    HTTP Error
+2017-09-01 20:51:24,942 get_pub_ccy  DEBUG    HTTP Error
+2017-09-01 20:51:25,327 get_pub_ccy  DEBUG    HTTP Error
+2017-09-01 20:51:25,760 get_pub_ccy  DEBUG    HTTP Error
+2017-09-01 20:51:26,314 get_pub_ccy  DEBUG    HTTP Error
+2017-09-01 20:51:27,490 get_pub_ccy  INFO     ('1.2953', '2017-09-02 00:51:00 UTC+0000')
+2017-09-01 20:51:27,491 get_pub_ccy  INFO     End
