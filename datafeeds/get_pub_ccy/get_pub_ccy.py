@@ -7,6 +7,7 @@ import logging
 import logging.config
 import time
 import datetime
+import urllib2
 
 from yahoo_finance import Currency
 import pika
@@ -20,6 +21,25 @@ def usage():
     print ('  (if env vars set, uses MR_CCY_FREQ, MR_RABITMQ)')
 
 
+def get_rate(ticker):
+    rate = 0
+    trade_time = 0
+
+    while rate == 0:
+        try:
+            ccy_pair =  Currency(ticker)
+            ccy_pair.refresh()
+            rate = ccy_pair.get_rate()
+            trade_time = str(ccy_pair.get_trade_datetime())
+
+        except urllib2.HTTPError, e:
+            logging.debug('HTTP Error')
+        except Exception, e:
+            logging.exception(e)
+            raise e
+    return rate,trade_time
+
+
 def get_v(ccy, ot_val=None):
     ticker = ccy.replace('/','')
     #logging.info('ticker %s' %ticker)
@@ -28,12 +48,13 @@ def get_v(ccy, ot_val=None):
         trade_time = str(datetime.datetime.now())
     else:
         try:
-            ccy_pair = Currency(ticker)
+            #ccy_pair = Currency(ticker)
+            rate,trade_time = get_rate(ticker)
         except Exception as e:
             #print str(e)
             return None
-        rate = str(ccy_pair.get_rate())
-        trade_time = str(ccy_pair.get_trade_datetime())
+        #rate = str(ccy_pair.get_rate())
+        #trade_time = str(ccy_pair.get_trade_datetime())
 
     msg =trade_time + ',' + rate
     logger.info(msg)
@@ -49,6 +70,9 @@ def open_channel(q):
 
     channel.exchange_declare(exchange=q, type='fanout')
     return channel
+
+
+
 
 
 def run(q):
@@ -106,6 +130,7 @@ if __name__ == '__main__':
         if o == '-v':
             ot_val = float(arg)
 
+
     LOG = os.environ.get('LOG','../log')
     INI = os.environ.get('INI','../ini')
 
@@ -123,19 +148,26 @@ if __name__ == '__main__':
 
     logger = logging.getLogger()#.addHandler(logging.StreamHandler())
     logger.info('Start')
-    logger.info(ccy)
 
-
-    if ot_val:
-        q = ccy
-        channel = open_channel(q)
-        v = get_v(ccy, ot_val)
-        channel.basic_publish(exchange=q, routing_key='', body=v)
+    if ccy == None:
+        logger.info('No ccy given, running as a test')
+        rate, trade_time = get_rate('GBPUSD')
+        logging.info( (rate, trade_time))
 
     else:
-    #try:
-        run(ccy)
-    #except Exception, e:
-    #    print 'ss'
-    #    logger.exception("Fatal error in get_prices")
+        logger.info(ccy)
+
+
+        if ot_val:
+            q = ccy
+            channel = open_channel(q)
+            v = get_v(ccy, ot_val)
+            channel.basic_publish(exchange=q, routing_key='', body=v)
+
+        else:
+        #try:
+            run(ccy)
+        #except Exception, e:
+        #    print 'ss'
+        #    logger.exception("Fatal error in get_prices")
     logger.info('End')
