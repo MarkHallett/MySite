@@ -7,7 +7,13 @@ import logging
 import logging.config
 import time
 import datetime
-import urllib2
+
+try:
+    from urllib2 import HTTPError
+except ImportError:
+    import urllib.request, urllib.parse, urllib.error
+    import urllib.request, urllib.error, urllib.parse
+    from urllib.error import HTTPError
 
 from yahoo_finance import Currency
 import pika
@@ -32,9 +38,9 @@ def get_rate(ticker):
             rate = ccy_pair.get_rate()
             trade_time = str(ccy_pair.get_trade_datetime())
 
-        except urllib2.HTTPError, e:
+        except HTTPError as e:
             logging.debug('HTTP Error')
-        except Exception, e:
+        except Exception as e:
             logging.exception(e)
             raise e
     return rate,trade_time
@@ -151,6 +157,7 @@ if __name__ == '__main__':
 
     if ccy == None:
         logger.info('No ccy given, running as a test')
+        logger.info(sys.version)
         rate, trade_time = get_rate('GBPUSD')
         logging.info( (rate, trade_time))
 
