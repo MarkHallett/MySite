@@ -1,4 +1,6 @@
-# Dockerup.ksh (1a)
+# docker_test_pub_ccy.ksh 
+
+echo "Publish $1 $2"
 
 . ./set_env.ksh -e DEV
 
@@ -8,8 +10,7 @@ docker run \
     -e MR_CCY_PAIR='GBP/USD' \
     -e MR_CCY_FREQ=5 \
     -e MR_RABITMQ=${MR_RABITMQ} \
-    --name get_gbp_usd \
-    markhallett/get_pub_ccy
+    markhallett/egtest python "/usr/src/get_pub_ccy.py" "-c" "$1" "-v" "$2"
 
 
 #docker run -p 5000:5000 \
