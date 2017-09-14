@@ -30,13 +30,13 @@
               <th>No.</th><th>id</th><th>value</th>
             </tr>
             <tr id="row1">
-              <td> 1 </td><td> id 1 </td><td id="1"> 0 </td>
+              <td> 1 </td><td> GBP/USD </td><td id="1"> 0 </td>
             </tr>
             <tr id="row2">
-              <td> 2 </td><td> id 2 </td><td id="2"> 0 </td>
+              <td> 2 </td><td> USD/EUR </td><td id="2"> 0 </td>
             </tr>
             <tr id="row3">
-              <td> 3 </td><td> id 3 </td><td id="3"> 0 </td>
+              <td> 3 </td><td> EUR/GBP </td><td id="3"> 0 </td>
             </tr>
           </table>
         </div>
@@ -46,7 +46,7 @@
               <th>No.</th><th>id</th><th>value</th>
             </tr>
             <tr id="row4">
-              <td> 4 </td><td> id 4 </td><td id="4"> 0 </td>
+              <td> 4 </td><td> GBP/USD/EUR </td><td id="4"> 0 </td>
             </tr>
             <tr id="row5">
               <td> 5 </td><td> id 5 </td><td id="5"> 0 </td>
@@ -130,9 +130,9 @@ var chart3Options = {
                     var series1 = self.series[0];
                     var redrawVal1 = true;
                     var shiftVal1 = false;
-                    if (series1.data && series1.data.length > 20) {
-                        shiftVal1 = true;
-                    }
+                    //if (series1.data && series1.data.length > 20) {
+                    //    shiftVal1 = true;
+                    //}
                     series1.addPoint([trade_time,point1], redrawVal1, shiftVal1);
                     console.log('Done point1');
                     }
@@ -143,9 +143,9 @@ var chart3Options = {
                     var series2 = self.series[1];
                     var redrawVal2 = true;
                     var shiftVal2 = false;
-                    if (series2.data && series2.data.length > 10) {
-                        shiftVal2 = true;
-                    }
+                    //if (series2.data && series2.data.length > 10) {
+                    //    shiftVal2 = true;
+                    //}
                     series2.addPoint([trade_time,point2], redrawVal2, shiftVal2);
                     console.log('Done point2');
                     }
@@ -157,9 +157,9 @@ var chart3Options = {
                     var series3 = self.series[2];
                     var redrawVal3 = true;
                     var shiftVal3 = false;
-                    if (series3.data && series3.data.length > 10) {
-                        shiftVal3 = true;
-                    }
+                    //if (series3.data && series3.data.length > 10) {
+                    //    shiftVal3 = true;
+                    //}
                     series3.addPoint([trade_time,point3], redrawVal3, shiftVal3);
                     console.log('Done point3');
                     console.log(trade_time)
@@ -171,9 +171,9 @@ var chart3Options = {
                     var series4 = self.series[3];
                     var redrawVal4 = true;
                     var shiftVal4 = false;
-                    if (series4.data && series4.data.length > 10) {
-                        shiftVal4 = true;
-                    }
+                    //if (series4.data && series4.data.length > 10) {
+                    //    shiftVal4 = true;
+                    //}
                     series4.addPoint([trade_time,point4], redrawVal4, shiftVal4);
                     console.log('Done');
                     console.log(trade_time);

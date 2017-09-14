@@ -141,7 +141,7 @@ class Mq2rest(object):#websocket.WebSocketHandler):
                 }
         #msg = 'write %s' %point_data
         #logging.info(msg)
-        payload = {'name':'GBP/USD/EUR','id':8,'value':y, 'trade_time':t}
+        payload = {'name':'GBP/USD/EUR','id':4,'value':y, 'trade_time':t}
         #print put('http://127.0.0.1:5000/todo/api/v1.0/tasks/1', json=payload )
         print ('post http://0.0.0.0:8888/api', payload )
         post ('http://0.0.0.0:8888/api', payload )
@@ -173,7 +173,7 @@ class Mq2rest(object):#websocket.WebSocketHandler):
                 }
 
              # , 'color': '#%02X%02X%02X' % (r(), r(), r())
-        payload = {'name':'GBP/USD','id':9,'value':y, 'trade_time':t}
+        payload = {'name':'GBP/USD','id':1,'value':y, 'trade_time':t}
         logging.info('post...')
         logging.info(payload)
         #print put('http://127.0.0.1:5000/todo/api/v1.0/tasks/1', json=payload )
@@ -200,7 +200,7 @@ class Mq2rest(object):#websocket.WebSocketHandler):
                 }
                 }
 
-        payload = {'name':'USD/EUR','id':9,'value':y, 'trade_time':t}
+        payload = {'name':'USD/EUR','id':2,'value':y, 'trade_time':t}
         #print ('post http://0.0.0.0:8888/api', payload )
         url = "http://0.0.0.0:8888/api"
         response = request("POST", url,  params=payload)
@@ -222,7 +222,7 @@ class Mq2rest(object):#websocket.WebSocketHandler):
                 }
 
         logging.info(t)
-        payload = {'name':'EUR/GBP','id':9,'value':y, 'trade_time':t}
+        payload = {'name':'EUR/GBP','id':3,'value':y, 'trade_time':t}
 
         url = "http://0.0.0.0:8888/api"
         response = request("POST", url,  params=payload)
