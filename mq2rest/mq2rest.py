@@ -68,7 +68,6 @@ class Mq2rest(object):#websocket.WebSocketHandler):
         #y = 10
         #self.send_data()
 
-        #url1 = 'amqp://xjdjtehg:9TQjzoOYM0Aabu6HgL1WCPz3v5-hqc8z@spotted-monkey.rmq.cloudamqp.com/xjdjtehg'
         url1 = os.environ['MR_RABITMQ']
         connection = pika.BlockingConnection(pika.URLParameters(url1))
 
@@ -127,6 +126,7 @@ class Mq2rest(object):#websocket.WebSocketHandler):
             t = datetime.datetime.now()
 
         y = float(v[:-1])
+        y = round(y,3)
         z = 2*y
         #y = self.x.get_value('GBP/USD/EUR')
         #logger.info('send y')
