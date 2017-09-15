@@ -1,79 +1,71 @@
 # cacl1_dag
 
+import time
 import logging
-import dag
+import dag_dot
 
 logger = logging.getLogger()
 
 
-class MyDAG(dag.DAG): # implementation
+class MyDAG(dag_dot.DAG): # implementation
     '''my dag'''
-    def __init__(self):
-        super(MyDAG, self).__init__()
+    #def __init__(self,filename):
+    def __init__(self,filename):
 
-        if hasattr(self,'a'):
+        super(MyDAG, self).__init__(filename)
+
+        if hasattr(self,'o'):
             return
-        self.a = dag.Node('gbp_usd')
-        self.b = dag.Node('usd_eur')
-        self.c = dag.Node('eur_gbp')
 
-        self.i = dag.Node('I', self.calcRateA )
-        self.a.usedby.append(self.i)
-        self.b.usedby.append(self.i)
+        # output node
+        self.o = self.makeNode(label='GBP/USD/EUR',calc=None,usedby = [],    nodetype='out')
 
-        self.o = dag.Node('GBP/USD/EUR', self.calcRateB )
-        self.c.usedby.append(self.o)
-        self.i.usedby.append(self.o)
+        # internal node
+        self.bb = self.makeNode(label='calc_B',calc=self.calcRateB,usedby=[self.o], nodetype='internal')
+        self.i = self.makeNode(label='calc_A',calc=self.calcRateA,usedby=[self.bb], nodetype='internal')
 
+        # input nodes
+        self.a = self.makeNode(label='gbp/usd',calc=None,usedby=[self.i], nodetype='in')
+        self.b = self.makeNode(label='usd/eur',calc=None,usedby=[self.i], nodetype='in')
+        self.c = self.makeNode(label='eur/gbp',calc=None,usedby=[self.bb], nodetype='in')
 
-    # set input node functions
-    def set_a(self,v):
-            logger.info ('set %s %s' %(self.a.doc,v))
-            self.setValue(self.a,v)
-
-    def set_b(self,v):
-            logger.info ('set %s %s' %(self.b.doc,v))
-            self.setValue(self.b,v)
-
-    def set_c(self,v):
-            logger.info ('set %s %s' %(self.c.doc,v))
-            self.setValue(self.c,v)
-
-    def ppInputs(self):
-        print (self.__doc__, ' inputs')
-        print ('a', '=', self.a.value, self.a.doc)
-        print ('b', '=', self.b.value, self.b.doc)
-        print ('c', '=', self.c.value, self.c.doc)
+        self.dot_pp()
 
 
-    def calcUSD(self ):
-        '''Use ccy'''
-        ccy = self.h.value
-        a = self.a.value
-        if ccy == 'USD':
-            return a * 2
-        return  0
+    @dag_dot.calc
+    def calcRateA(self, node=None):
+        #time.sleep(1)
+        return self.a.value * self.b.value
 
-    def calcRateA(self):
-         return self.a.value * self.b.value
-
-    def calcRateB(self):
+    @dag_dot.calc
+    def calcRateB(self, node=None):
+        #time.sleep(1)
         return self.i.value * self.c.value
 
-#class Dag(MyDAG):
-#    pass
-
 '''
-print '-------------'
-MyDAG().set_a(1)
-MyDAG().set_b(2)
-MyDAG().set_c(3)
-MyDAG().pp()
-MyDAG().ppInputs()
-MyDAG().ppOutputs()
-print '----------'
-MyDAG().set_a(2)
-MyDAG().set_b(0)
-MyDAG().set_b(4)
-MyDAG().pp()
+print '-1------------'
+
+p = 1
+d = MyDAG('./G.png') #'G.png')
+time.sleep(p)
+print 'set a 1'
+d.set_input('gbp/usd',1)
+time.sleep(p)
+print 'set b 2'
+d.set_input('usd/eur',2)
+time.sleep(p)
+print 'set c 3'
+d.set_input('eur/gbp',3)
+time.sleep(p)
+#d.pp()
+#d.ppInputs()
+#d.ppOutputs()
+print '-2---------'
+d.set_input('gbp/usd',2)
+time.sleep(p)
+d.set_input('usd/eur',0)
+time.sleep(p)
+d.set_input('usd/eur',4)
+time.sleep(p)
+d.pp()
 '''
