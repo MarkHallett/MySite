@@ -9,13 +9,16 @@ import pika
 
 import gbp_usd_eur_dag
 
+D = gbp_usd_eur_dag.MyDAG('./gbp_usd_eur.png')
 
 def callback_gbp_usd(ch, method, properties, body):
     logger.info("subscribed [GBP/USD] %r" % body)
     t,v = str(body).split(',')
     v = float(v[:-1])
     #logger.info(v)
-    gbp_usd_eur_dag.MyDAG().set_a(v)
+    #gbp_usd_eur_dag.MyDAG().set_a(v)
+    #gbp_usd_eur_dag.MyDAG().set_input('gbp/usd',v)
+    D.set_input('gbp/usd',v)
 
 def callback_usd_eur(ch, method, properties, body):
     logger.info("subscribed [USD/EUR] %r" % body)
@@ -23,14 +26,19 @@ def callback_usd_eur(ch, method, properties, body):
 
     v = float(v[:-1])
     #logger.info(v)
-    gbp_usd_eur_dag.MyDAG().set_b(v)
+    #gbp_usd_eur_dag.MyDAG().set_b(v)
+    #gbp_usd_eur_dag.MyDAG().set_input('usd/eur',v)
+    D.set_input('usd/eur',v)
 
 def callback_eur_gbp(ch, method, properties, body):
     logger.info("subscribed [EUR/GBP] %r" % body)
     t,v = str(body).split(',')
-    v = float(v[:-1])     
+    v = float(v[:-1])
     #logger.info(v)
-    gbp_usd_eur_dag.MyDAG().set_c(v)
+    #gbp_usd_eur_dag.MyDAG().set_c(v)
+    #gbp_usd_eur_dag.MyDAG().set_input('eur/gbp',v)
+    D.set_input('eur/gbp',v)
+
 
 def run():
     logger.info('run')
