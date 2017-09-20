@@ -57,6 +57,7 @@ def get_v(ccy, ot_val=None):
         try:
             #ccy_pair = Currency(ticker)
             rate,trade_time = get_rate(ticker)
+            trade_time = str(datetime.datetime.now())
         except Exception as e:
             #print str(e)
             return None
