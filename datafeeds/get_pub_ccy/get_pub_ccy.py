@@ -36,7 +36,8 @@ def get_rate(ticker):
             ccy_pair =  Currency(ticker)
             ccy_pair.refresh()
             rate = ccy_pair.get_rate()
-            trade_time = str(ccy_pair.get_trade_datetime())
+            #trade_time = str(ccy_pair.get_trade_datetime())
+            trade_time = datetime.datetime.now().time()
 
         except HTTPError as e:
             logging.debug('HTTP Error')
