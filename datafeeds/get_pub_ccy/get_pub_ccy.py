@@ -63,7 +63,7 @@ def get_v(ccy, ot_val=None):
         #rate = str(ccy_pair.get_rate())
         #trade_time = str(ccy_pair.get_trade_datetime())
 
-    msg =trade_time + ',' + rate
+    msg = str(trade_time) + ',' + rate
     logger.info(msg)
     return msg
     return (str(trade_time) + ',' + str(rate))
