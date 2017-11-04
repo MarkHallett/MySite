@@ -5,6 +5,7 @@ import logging
 import pygraphviz as pgv
 #import mr_mess_bus
 import threading
+import publish
 
 logger = logging.getLogger()
 
@@ -113,11 +114,11 @@ class DAG(object): # functionality
            # if output print
         print 'SET VALUE used by', n.usedby[0].doc
         if n.usedby[0].usedby == []:
-            print '!! SET VALUE OF OUTPUT'
-            msg = 'update %s %s' %(n.usedby[0].doc, n.value)
+            #print '!! SET VALUE OF OUTPUT'
+            msg = 'update dag_dot.py %s %s' %(n.usedby[0].doc, n.value)
             logger.info (msg)
-            print msg
-            #publish.run(n.doc,str(n.value))
+            #print msg
+            publish.run(n.usedby[0].doc,str(n.value))
             #mr_mess_bus.publish(n.usedby[0].doc,str(n.value))
 
 

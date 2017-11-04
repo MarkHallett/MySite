@@ -14,6 +14,7 @@ class DAG(object): # functionality
         self.__dict__ = self.__shared_state
 
     def setValue(self,n,v):
+        print '!! dag.py setValue', n, v
         if v == n.value:
             return
 
@@ -29,8 +30,9 @@ class DAG(object): # functionality
 
            # if output print
         if n.usedby == []:
-            msg = 'update %s %s' %(n.doc, n.value)
+            msg = 'update dag.py %s %s' %(n.doc, n.value)
             logger.info (msg)
+            print 'dag.py end node , publish run'
             publish.run(n.doc,str(n.value))
 
     def pp(self): # must be over ridden by a borg

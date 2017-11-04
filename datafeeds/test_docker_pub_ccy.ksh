@@ -1,7 +1,8 @@
-# docker_test_pub_ccy.ksh 
+# docker_test_pub_ccy.ksh
 
 echo "Publish $1 $2"
 
+cd ..
 . ./set_env.ksh -e DEV
 
 # python site/my_app/manage.py runserver
