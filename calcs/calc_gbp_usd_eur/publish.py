@@ -3,6 +3,7 @@
 
 import os
 import sys
+import time
 import getopt
 import logging
 import logging.config
@@ -15,29 +16,23 @@ def usage():
     print ('  -v publish value')
 
 def run(q,v):
-    #logger = logging.getLogger()#.addHandler(logging.StreamHandler())
 
     logger.info('run')
     logger.info('  queue %s' %q)
 #    v = str(v)
     logger.debug('test')
 
-
-    #url1 = 'amqp://xjdjtehg:9TQjzoOYM0Aabu6HgL1WCPz3v5-hqc8z@spotted-monkey.rmq.cloudamqp.com/xjdjtehg'
     url1 = os.environ['MR_RABITMQ']
 
     connection = pika.BlockingConnection(pika.URLParameters(url1))
     channel = connection.channel()
 
 
-    channel.exchange_declare(exchange=q,
-                         type='fanout')
+    channel.exchange_declare(exchange=q, type='fanout')
 
     #message = ' '.join(sys.argv[1:]) or "info: Hello World!"
-    channel.basic_publish(exchange=q,
-                      routing_key='',
-                      body=v)
-    #print(" [x] Sent %r" % message)
+    channel.basic_publish(exchange=q, routing_key='', body=v)
+    time.sleep(1)
     connection.close()
 
     msg = "publish [%s] value %s" %(q, v)
