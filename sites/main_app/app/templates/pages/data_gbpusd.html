@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>GBP/USD/EUR</title>
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+$(function () {
+	var chart3Options = {
+			chart: {
+					type: 'spline',
+					events: {
+							load: function () {
+									var self = this;
+									var connection = new WebSocket('ws://localhost:8002/websocket')
+									connection.onmessage = function(event) {
+											var data = JSON.parse(event.data);
+											var point1 = data['GBP/USD/EUR'];
+											var point2 = data['GBP/USD'];
+											var point3 = data['USD/EUR'];
+											var point4 = data['EUR/GBP'];
+											if (point1){
+											var series1 = self.series[0];
+											var redrawVal1 = true;
+											var shiftVal1 = false;
+											if (series1.data && series1.data.length > 20) {
+													shiftVal1 = true;
+										  }
+											series1.addPoint(point1, redrawVal1, shiftVal1);
+										  }
+										  if (point2){
+											var series2 = self.series[1];
+											var redrawVal2 = true;
+											var shiftVal2 = false;
+											if (series2.data && series2.data.length > 10) {
+													shiftVal2 = true;
+										  }
+											series2.addPoint(point2, redrawVal2, shiftVal2);
+										  }
+										  if (point3){
+											var series3 = self.series[2];
+											var redrawVal3 = true;
+											var shiftVal3 = false;
+											if (series3.data && series3.data.length > 10) {
+													shiftVal3 = true;
+										  }
+											series3.addPoint(point3, redrawVal3, shiftVal3);
+										  }
+										  if (point4){
+											var series4 = self.series[3];
+											var redrawVal4 = true;
+											var shiftVal4 = false;
+											if (series4.data && series4.data.length > 10) {
+													shiftVal4 = true;
+										  }
+											series4.addPoint(point4, redrawVal4, shiftVal4);
+										  }
+									};
+							}
+					}
+			},
+			title: {
+					text: 'XX Using WebSockets for realtime updates GBP/USD/EUR'
+			},
+			xAxis: {
+					type: 'datetime'
+			},
+			series: [
+				       {
+					name: 'GBP/USD/EUR',
+					data: []
+			},
+				       {
+					name: 'GBP/USD',
+					data: []
+			},
+				       {
+					name: 'USD/EUR',
+					data: []
+			},
+				       {
+					name: 'EUR/GBP',
+					data: []
+			}
+		]
+	};
+		 $('#container').highcharts(chart3Options);
+});
+		</script>
+	</head>
+	<body>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+
+	</body>
+</html>
