@@ -1,0 +1,36 @@
+{% extends "common/page_base.html" %}  {# common/page_base.html extends layout.html #}
+
+{% block content %}
+<h1>Admin page</h1>
+
+<p>This page is accessible to authenticated users with the 'admin' role.</p>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>confirmed_at</th>
+            <th>is_active</th>
+        <tr>
+    </thead>
+
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{user.confirmed_at }}</td>
+            <td>{{user.is_active}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p>To Do<p>
+<p>admin pages for registrations and logins <p>
+
+
+
+{% endblock %}

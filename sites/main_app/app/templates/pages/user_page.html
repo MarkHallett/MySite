@@ -1,0 +1,17 @@
+{% extends "common/page_base.html" %}  {# common/page_base.html extends layout.html #}
+
+{% block content %}
+<h1>User page</h1>
+
+<a href="{{ url_for('cv_page') }}">Mark Hallett CV</a>
+<p>
+<p>
+<a href="http://0.0.0.0:8888">data_gbpusdeur</a>
+<p>
+<p>
+<a href="http://www.markhallett.co.uk">Mark Hallett wiki</a>
+<p>
+<a href="http://www.medareda.com">MedaReda wiki</a>
+<p>
+<a href="{{ url_for('medareda_page') }}">MedaReda live demo</a>
+{% endblock %}
