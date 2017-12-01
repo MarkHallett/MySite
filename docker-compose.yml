@@ -1,0 +1,68 @@
+version: '2'
+
+services:
+
+  # 3
+  calc_gbp_usd_eur:
+    image: markhallett/calc_gbp_usd_eur
+    environment:
+           - MR_RABITMQ=${MR_RABITMQ}
+    volumes:
+           - "log:/log"
+           - "ini:/ini"
+           - "data:/data"
+
+  # 4
+  #mq2rest:
+  #  image: markhallett/mq2rest
+  #  #ports:
+  #  #      - "5001:5001"
+  #  networks:
+  #       hostnet: {}
+  #  #network_mode: "host"
+  #  environment:
+  #         - MR_RABITMQ=${MR_RABITMQ}
+  #  volumes:
+  #         - "log:/log"
+  #         - "ini:/ini"
+  #         - "data:/data"
+
+ # 5
+  rest2web:
+    image: markhallett/rest2web
+    ports:
+          - "8888:8888"
+    volumes:
+           - "log:/log"
+           - "ini:/ini"
+           - "data:/data"
+
+  #6
+  gbp_usd_eur_app:
+    image: markhallett/gbp_usd_eur_app
+    ports:
+         - "5001:5001"
+    volumes:
+           - "log:/log"
+           - "ini:/ini"
+           - "data:/data"
+
+  # 7
+  app:
+    image: markhallett/app
+    ports:
+         - "5000:5000"
+    volumes:
+           - "log:/log"
+           - "ini:/ini"
+           - "data:/data"
+
+networks:
+   hostnet:
+
+volumes:
+    log:
+    ini:
+    data:
+
+
