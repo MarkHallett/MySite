@@ -1,0 +1,27 @@
+FROM python
+
+# subscribe 2 api
+
+# RUN apt-get -y update && apt-get install ...
+
+## install Python modules needed by the Python app
+COPY ./src/mq2rest/requirements.txt /usr/src/app/
+RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+
+#VOLUME ./log
+#VOLUME ./ini
+VOLUME /mr/ini
+VOLUME /mr/log
+VOLUME /mr/data
+
+EXPOSE 8888
+
+ENV INI=/mr/ini
+ENV LOG=/mr/log
+
+COPY ./src/mq2rest/mq2rest.py /usr/src
+COPY ./ini/logging_config_mq2rest.ini /mr/ini/logging_config_mq2rest.ini
+#COPY ./ini/logging_config_mq2rest.ini /mr/log/X_mq2rest
+#COPY ./ini/logging_config_mq2rest.ini /mr/datahh/X_mq2rest
+
+CMD ["python", "/usr/src/mq2rest.py"]
