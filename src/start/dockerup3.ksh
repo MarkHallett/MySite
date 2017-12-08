@@ -4,4 +4,6 @@
 
 docker run \
     -e MR_RABITMQ=${MR_RABITMQ} \
-    markhallett/calc_gbpusdeur
+    --mount source=mr,destination=/mr \
+    --name calc_gbp_usd_eur \
+    markhallett/calc_gbp_usd_eur

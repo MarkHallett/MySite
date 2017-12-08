@@ -3,4 +3,6 @@
 . ./set_env.ksh -e DEV
 
 docker run -p 8888:8888 \
-    markhallett/rest2web
+      5_rest2web
+
+#    markhallett/rest2web

@@ -1,7 +1,7 @@
 #! /bin/ksh
 # set_env.ksh
 #
-# . ./set_env.ksh DEV
+# . ./set_env.ksh -e DEV
 
 usage()
 {

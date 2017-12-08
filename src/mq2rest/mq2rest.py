@@ -24,49 +24,9 @@ r = lambda: random.randint(0,255)
 # Boilerplate WebSocket code
 class Mq2rest(object):#websocket.WebSocketHandler):
 
-    #def check_originX(self, origin):
-    #    return True
-
-    #def openX(self):
-    #    logging.info( 'Connection established.')
-    #    if self not in cl:
-    #        print ('Append')
-    #        cl.append(self)
-
-    #    body = 33
-    #    logging.info('callback_gbp_usd %s' %body)
-
-        #y = float(body)
-        #y = self.x.get_value('GBP/USD/EUR')
-        #logger.info('send y')
-        #point_data = { 'GBP/USD' :{
-        #      'x': int(time()),
-        #      'y': y
-        #        }
-        #        }
-
-        #for c in cl:
-        #    c.write_message(json.dumps(point_data))
-
-                #self.x = xx.yy('dd')
-                # Set up a call to send_data in 5 seconds
-                #for c in cl:
-    #    ioloop.IOLoop.instance().add_timeout(datetime.timedelta(seconds=1), self.wait_for_data)
-
-    #def on_messageX(self, message):
-    #    print 'Message received {0}.'.format(message)
-
-    #def on_closeX(self):
-    #    print 'Connection closed.'
-    #    if self in cl:
-    #        print ('Remove')
-    #        cl.remove(self)
-
-    # Our function to get new (random) data for charts
+    # Our function to get new data for charts
     def wait_for_data(self):
         logging.info('wait_for_data')
-        #y = 10
-        #self.send_data()
 
         url1 = os.environ['MR_RABITMQ']
         connection = pika.BlockingConnection(pika.URLParameters(url1))
@@ -77,7 +37,7 @@ class Mq2rest(object):#websocket.WebSocketHandler):
         result = channel.queue_declare(exclusive=True)
         queue_name = result.method.queue
         channel.queue_bind(exchange=q1, queue=queue_name)
-        channel.basic_consume(self.send_data, queue=queue_name, no_ack=True)
+        channel.basic_consume(self.callback_gbp_usd_eur, queue=queue_name, no_ack=True)
 
         channel2 = connection.channel()
         q2 = 'GBP/USD'
@@ -115,9 +75,9 @@ class Mq2rest(object):#websocket.WebSocketHandler):
         #for c in cl:
         ioloop.IOLaoop.instance().add_timeout(datetime.timedelta(seconds=timeout), self.wait_for_data)
 
-    def send_data(self,ch, method, properties, body):
+    def callback_gbp_usd_eur(self,ch, method, properties, body):
         # send data
-        logging.info('send_data (s) %s' %body)
+        logging.info('callback_gbp_usd_eur (s) %s' %body)
 
         try:
             t, v = str(body).split(',')
@@ -125,54 +85,51 @@ class Mq2rest(object):#websocket.WebSocketHandler):
             v = body
             t = datetime.datetime.now()
 
-        y = float(v[:-1])
-        y = round(y,3)
-        z = 2*y
+        if v in ('e','?'):
+            return
+
+        if isinstance(v,str):
+            v = v.strip("'")
+
+        try:
+            y = float(v)
+        except:
+            return # not ideal way to handle it
+
+        y = round(y,4)
         #y = self.x.get_value('GBP/USD/EUR')
         #logger.info('send y')
-        point_data = { 'GBP/USD/EUR' :{
-              'x': int(time()),
-              'y': y
-                },
-              'GBP/USDx' :{
-              'x': int(time()),
-              'y': z
-                }
-                }
+
+        logging.info(('t',t))
         #msg = 'write %s' %point_data
         #logging.info(msg)
-        payload = {'name':'GBP/USD/EUR','id':4,'value':y, 'trade_time':t}
+        payload = {'name':'GBP/USD/EUR','id':4,'value':y, 'trade_time':str(t)}
         #print put('http://127.0.0.1:5000/todo/api/v1.0/tasks/1', json=payload )
         print ('post http://0.0.0.0:8888/api', payload )
         post ('http://0.0.0.0:8888/api', payload )
 
-        return
-        url = "http://0.0.0.0:8888/api"
-        payload2 = {"trade_time":"2017-05-29 15:17:01","id":"1","value":"1.1","name":"GBP/USD/EUR"}
-        response = request("POST", url,  params=payload)
-
-        url = "http://0.0.0.0:8888/api"
-        response = request("POST", url,  params=payload2)
-        logging.info(response.text)
-
-        #self.write_message(json.dumps(point_data))
 
     def callback_gbp_usd(self,ch, method, properties, body):
         logging.info('callback_gbp_usd %s' %body)
         print('callback_gbp_usd %s' %body)
 
         t, v = str(body).split(',')
-        y = float(v[0:-1])
+
+        if v in ('e','?'):
+            return
+
+        if isinstance(v,str):
+            v = v.strip("'")
+        y = float(v)
+        #y = float(v[0:-1])
         #y = float(body)
         #y = self.x.get_value('GBP/USD/EUR')
         #logger.info('send y')
-        point_data = { 'GBP/USD' :{
-              'x': int(time()),
-              'y': y
-                }
-                }
 
-             # , 'color': '#%02X%02X%02X' % (r(), r(), r())
+        # odd but true, container needs this
+        if len(t) == 28:
+            t = t[2:]
+
         payload = {'name':'GBP/USD','id':1,'value':y, 'trade_time':t}
         logging.info('post...')
         logging.info(payload)
@@ -184,21 +141,24 @@ class Mq2rest(object):#websocket.WebSocketHandler):
         response = request("POST", url,  params=payload)
         logging.info(response.text)
 
-        #for c in cl:
-        #    c.write_message(json.dumps(point_data))
-
     def callback_usd_eur(self,ch, method, properties, body):
         logging.info('callback_usd_eur %s' %body)
         t, v = str(body).split(',')
-        y = float(v[:-1])
+        #y = float(v[:-1])
+
+        if v in ('e','?'):
+            return
+
+        if isinstance(v,str):
+            v = v.strip("'")
+        y = float(v)
         #y = float(body)
         #y = self.x.get_value('GBP/USD/EUR')
         #logger.info('send y')
-        point_data = { 'USD/EUR' :{
-              'x': int(time()),
-              'y': y
-                }
-                }
+
+        # odd but true container needs this
+        if len(t) == 28:
+            t = t[2:]
 
         payload = {'name':'USD/EUR','id':2,'value':y, 'trade_time':t}
         #print ('post http://0.0.0.0:8888/api', payload )
@@ -211,15 +171,20 @@ class Mq2rest(object):#websocket.WebSocketHandler):
     def callback_eur_gbp(self,ch, method, properties, body):
         logging.info('callback_eur_gbp %s' %body)
         t, v = str(body).split(',')
-        y = float(v[:-1])
+        #y = float(v[:-1])
+        if v in ('e','?'):
+            return
+
+        if isinstance(v,str):
+            v = v.strip("'")
+        y = float(v)
         #y = float(body)
         #y = self.x.get_value('GBP/USD/EUR')
         #logger.info('send y')
-        point_data = { 'EUR/GBP' :{
-              'x': int(time()),
-              'y': y
-                }
-                }
+
+        # odd but true, container needs this
+        if len(t) == 28:
+            t = t[2:]
 
         logging.info(t)
         payload = {'name':'EUR/GBP','id':3,'value':y, 'trade_time':t}
@@ -232,26 +197,28 @@ class Mq2rest(object):#websocket.WebSocketHandler):
 
 if __name__ == "__main__":
 
-        LOG = os.environ.get('LOG','./log')
-        INI = os.environ.get('INI','./ini')
+        LOG = os.environ.get('LOG','/mr/log')
+        INI = os.environ.get('INI','/mr/ini')
 
         print ('LOG', LOG)
         print ('INI', INI)
 
-        log_ini = os.path.join(INI,'logging_config.ini')
-        if os.path.isfile(log_ini):
-            print ("ini files exists")
-        else:
+        log_ini = os.path.join(INI,'logging_config_mq2rest.ini')
+        if not os.path.isfile(log_ini):
             print (log_ini)
             print ("ini file missing")
 
-        logging.config.fileConfig(log_ini)
+        else:
+            print (log_ini)
+            print ("ini files exists")
 
-        logger = logging.getLogger()#.addHandler(logging.StreamHandler())
-        logger.info('Start')
+            logging.config.fileConfig(log_ini)
 
-        mq2rest = Mq2rest()
-        mq2rest.wait_for_data()
+            logger = logging.getLogger()#.addHandler(logging.StreamHandler())
+            logger.info('Start')
+
+            mq2rest = Mq2rest()
+            mq2rest.wait_for_data()
 
         #try:
         #except Exception, e:
