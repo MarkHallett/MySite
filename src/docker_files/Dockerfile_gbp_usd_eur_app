@@ -1,0 +1,16 @@
+FROM tiangolo/uwsgi-nginx-flask:flask
+
+MAINTAINER dev "6dev@eg.com"
+RUN apt-get update -y
+RUN apt-get install -y python-pip python-dev build-essential
+RUN pip install --upgrade pip
+RUN pip install gunicorn
+
+VOLUME /mr
+
+COPY src/sites/gbp_usd_eur_app/gbp_usd_eur_app .
+
+EXPOSE 5001
+
+ENTRYPOINT ["python"]
+CMD ["run.py"]

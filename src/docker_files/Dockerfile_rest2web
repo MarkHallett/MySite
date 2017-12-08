@@ -1,0 +1,22 @@
+FROM python
+
+# RUN apt-get -y update && apt-get install ...
+## install Python modules needed by the Python app
+COPY ./src/rest2web/requirements.txt /usr/src/app/
+RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+
+#VOLUME ./log
+#VOLUME ./ini
+VOLUME ./mr
+
+ENV INI=/mr/ini
+ENV LOG=/mr/log
+
+EXPOSE 8888
+
+COPY ./src/rest2web/rest2web.py /usr/src
+#COPY ./show_gbp_usd_test.html /usr/src
+COPY ./src/rest2web/show_gbp_usd_eur.html /usr/src
+COPY ./ini/logging_config_rest2web.ini /mr/ini/logging_config_rest2web.ini
+
+CMD ["python", "/usr/src/rest2web.py"]
