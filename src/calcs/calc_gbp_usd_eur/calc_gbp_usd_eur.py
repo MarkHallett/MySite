@@ -9,6 +9,12 @@ import pika
 
 import gbp_usd_eur_dag
 
+
+try:
+    os.stat('/mr/data')
+except:
+    os.mkdir('/mr/data')
+
 #D = gbp_usd_eur_dag.MyDAG('../data/gbp_usd_eur.png')
 D = gbp_usd_eur_dag.MyDAG('/mr/data/gbp_usd_eur.png')
 
@@ -47,7 +53,6 @@ def callback_eur_gbp(ch, method, properties, body):
 def run():
     logger.info('run')
     logger.debug('test')
-
 
     url1 = os.environ['MR_RABITMQ']
     connection = pika.BlockingConnection(pika.URLParameters(url1))
@@ -88,6 +93,12 @@ def run():
 if __name__ == '__main__':
 
     LOG = os.environ.get('LOG','/mr/log')
+    try:
+        os.stat(LOG)
+    except:
+        os.mkdir(LOG)
+
+
     INI = os.environ.get('INI','/usr/ini')
 
     print ('LOG', LOG)

@@ -6,14 +6,9 @@ FROM python
 COPY requirements.txt /usr/src/app/
 RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
 
-#VOLUME /log
-#VOLUME /ini
-
 ENV INI=/ini
 ENV LOG=/log
 
-COPY ./get_pub_ccy/get_pub_ccy.py /usr/src
-COPY ./ini/logging_config.ini ./ini/logging_config.ini
+COPY ./send_example_data.py /usr/src
 
-#CMD ["python", "/usr/src/get_pub_ccy.py", "-cGBP/USD"]
-CMD ["python", "/usr/src/get_pub_ccy.py"]
+CMD ["python", "/usr/src/send_example_data.py"]
