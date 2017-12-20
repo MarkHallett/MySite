@@ -1,0 +1,14 @@
+FROM python
+
+# RUN apt-get -y update && apt-get install ...
+
+## install Python modules needed by the Python app
+COPY ./src/datafeeds/requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
+
+ENV INI=/ini
+ENV LOG=/log
+
+COPY ./src/datafeeds/send_example_data.py /usr/src
+
+CMD ["python", "/usr/src/send_example_data.py"]
