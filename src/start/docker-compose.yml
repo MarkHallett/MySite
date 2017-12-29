@@ -32,7 +32,7 @@ services:
     volumes:
         - "mr:/mr"
 
-        
+
   #6
   gbp_usd_eur_app:
     image: markhallett/gbp_usd_eur_app
@@ -43,7 +43,7 @@ services:
 
   # 7
   app:
-    image: markhallett/myapp
+    image: markhallett/app
     environment:
            - GMAIL_USERNAME=${GMAIL_USERNAME}
            - GMAIL_PASSWORD=${GMAIL_PASSWORD}
