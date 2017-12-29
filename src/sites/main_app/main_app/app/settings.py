@@ -5,7 +5,7 @@
 import os
 
 # Application settings
-APP_NAME = "Mark Hallett starter app"
+APP_NAME = "Mark Hallett"
 APP_SYSTEM_ERROR_SUBJECT_LINE = APP_NAME + " system error"
 
 # Flask settings

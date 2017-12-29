@@ -3,7 +3,16 @@
 {% block content %}
 <h1>Home page</h1>
 
-<p>Welcome to this site, use User page contains, my CV, my wiki, a live demo, etc </p>
+<p>Welcome to this site. </p>
+<p> The User page contains links to...</p>
+
+<ul>
+  <li>How this site was built</li>
+  <li>My CV</li>
+  <li>My wiki</li>
+  <li>Demo video</li>
+</ul>
+
 
 
 {% if not current_user.is_authenticated %}
@@ -15,52 +24,7 @@ To view the User page, please
 {% endif %}
 <p>
 <p>
-Technology used in this site
 
-<table class="table">
-
-    <thead>
-        <tr>
-            <th>Tech</th>
-            <th>Usage</th>
-        <tr>
-    </thead>
-
-    <tbody>
-        <tr>            <td>Python</td>           <td>Main progrmming language</td>  </tr>
-        <tr>            <td>Flask</td>            <td>Web framework</td>        </tr>
-        <tr>            <td>Flask-user</td>       <td>Web permissions</td>        </tr>
-        <tr>            <td>Atom</td>             <td>Text editor</td>        </tr>
-        <tr>            <td>vi</td>               <td>Text editor</td>        </tr>
-        <tr>            <td>sqlite</td>           <td>Database</td>        </tr>
-        <tr>            <td>DB Browser for SQLite</td>       <td>Database viewer</td>        </tr>
-        <tr>            <td>Digital Ocean</td>      <td>Cloud hosting</td>        </tr>
-        <tr>            <td>git</td>            <td>Source control</td>        </tr>
-        <tr>            <td>github</td>            <td>Source hosting</td>        </tr>
-        <tr>            <td>docker</td>            <td>Containers</td>        </tr>
-        <tr>            <td>dockerhub</td>            <td>Container hosting</td>        </tr>
-        <tr>            <td>Yahoo finance</td>            <td>Price feeds</td>        </tr>
-        <tr>            <td>bootstrap</td>            <td>Web design</td>        </tr>
-        <tr>            <td>DOT</td>            <td>Graphical representation</td>        </tr>
-        <tr>            <td>Highcharts</td>            <td>Graphical representation </td>        </tr>
-        <tr>            <td>RabitMQ</td>            <td>Messaging</td>        </tr>
-        <tr>            <td>CloudAMQP</td>            <td>Cloud messaging</td>        </tr>
-        <tr>            <td>Wikis</td>            <td>TiddlyWiki</td>        </tr>
-        <tr>            <td>Wiki hosting</td>            <td>TiddlySpot</td>        </tr>
-
-
-    </tbody>
-</table>
-
-<!--<p>(postman RESTfull api )-->
-
-{% if not current_user.is_authenticated %}
-<p>
-To view the User page, you must
-<a href="{{ url_for('user.login') }}">Sign in</a> or
-<a href="{{ url_for('user.register') }}">Register</a>.
-</p>
-{% endif %}
 
 <!-- <p> TT Test users:<br/> - user@example.com / Password1<br/> - admin@example.com / Password1 </p> -->
 
