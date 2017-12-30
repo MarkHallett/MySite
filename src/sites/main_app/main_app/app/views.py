@@ -45,6 +45,11 @@ def todo_page():
 def mr_wiki():
     return render_template('pages/mr_wiki.html' )
 
+@app.route('/mr_video')
+@login_required  # Limits access to authenticated users
+def mr_video_page():
+    return render_template('pages/mr_video_page.html' )
+
 @app.route('/medareda')
 @login_required  # Limits access to authenticated users
 def medareda_page():
@@ -52,7 +57,7 @@ def medareda_page():
 
 @app.route('/tech_used')
 @login_required  # Limits access to authenticated users
-def tech_used():
+def tech_used_page():
     return render_template('pages/tech_used_page.html' )
 
 # The Admin page is accessible to users with the 'admin' role
