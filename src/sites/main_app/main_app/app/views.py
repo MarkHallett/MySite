@@ -50,6 +50,10 @@ def mr_wiki():
 def medareda_page():
     return render_template('pages/medareda_page.html' )
 
+@app.route('/tech_used')
+@login_required  # Limits access to authenticated users
+def tech_used():
+    return render_template('pages/tech_used_page.html' )
 
 # The Admin page is accessible to users with the 'admin' role
 @app.route('/admin')
