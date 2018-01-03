@@ -10,12 +10,28 @@ from app.init_app import app, db
 from app.models import UserProfileForm
 
 # The Home page is accessible to anyone
-@app.route('/')
-def home_page():
+@app.route('/debug')
+def debug_page():
+
+    db_location = os.environ['SQLALCHEMY_DATABASE_URI']
+    print ('db_location',db_location)
+
+    if os.path.isfile(db_location):
+        print ('YUP DB THERE')
+        msg = 'OK' + db_location
+    else:
+        print ('ERROR DB NOT THERE')
+        msg = 'OK' + db_location
+
+    return msg
     #xx = os.getenv('MAIL_USERNAME')
     #yy = os.getenv('MAIL_PASSWORD')
     #print 'xx',xx
-    #return render_template('pages/home_page.html', xx = xx, yy=yy )
+
+
+
+@app.route('/')
+def home_page():
     return render_template('pages/home_page.html')
 
 
@@ -64,8 +80,17 @@ def tech_used_page():
 @app.route('/admin')
 @roles_accepted('admin')  # Limits access to users with the 'admin' role
 def admin_page():
+
+    db_location = os.environ['SQLALCHEMY_DATABASE_URI']
+    print ('db_location',db_location)
+
+    if os.path.isfile(db_location):
+        print ('YUP DB THERE')
+    else:
+        print ('ERROR DB NOT THERE')
+
     users = db.session.query('id','email','confirmed_at','is_active').from_statement('SELECT id,email,confirmed_at,is_active from users')
-    return render_template('pages/admin_page.html' , users = users )
+    return render_template('pages/admin_page.html' , users = users , db_location = db_location )
 
 
 @app.route('/pages/profile', methods=['GET', 'POST'])

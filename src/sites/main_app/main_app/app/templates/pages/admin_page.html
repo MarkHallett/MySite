@@ -5,6 +5,14 @@
 
 <p>This page is accessible to authenticated users with the 'admin' role.</p>
 
+{% if db_location %}
+  <p>db location {{ db_location}}
+{% else %}
+  <p>DB location SQLALCHEMY_DATABASE_URI not set
+{% endif %}
+
+
+
 <table class="table">
 
     <thead>
