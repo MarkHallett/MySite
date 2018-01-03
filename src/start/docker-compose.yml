@@ -9,20 +9,16 @@ services:
            - MR_RABITMQ=${MR_RABITMQ}
            - INI=/usr/ini
     volumes:
-            - "mr:/mr"
+            - "/tmp/mr:/mr"
 
   # 4
   mq2rest:
     image: markhallett/mq2rest
-    #ports:
-    #      - "5001:5001"
-    #networks:
-    #    hostnet: {}
     network_mode: "host"
     environment:
            - MR_RABITMQ=${MR_RABITMQ}
     volumes:
-           - "mr:/mr"
+           - "/tmp/mr:/mr"
 
   # 5
   rest2web:
@@ -30,7 +26,7 @@ services:
     ports:
         - "8888:8888"
     volumes:
-        - "mr:/mr"
+        - "/tmp/mr:/mr"
 
 
   #6
@@ -39,7 +35,7 @@ services:
     ports:
          - "5001:5001"
     volumes:
-           - "mr:/mr"
+           - "/tmp/mr:/mr"
 
   # 7
   app:
@@ -47,10 +43,12 @@ services:
     environment:
            - GMAIL_USERNAME=${GMAIL_USERNAME}
            - GMAIL_PASSWORD=${GMAIL_PASSWORD}
+           - SECRET_KEY=${SECRET_KEY}
+           - SQLALCHEMY_DATABASE_URI=${SQLALCHEMY_DATABASE_URI}
     ports:
          - "5000:5000"
     volumes:
-           - "mr:/mr"
+           - "/tmp/mr:/mr"
 
 
 networks:
