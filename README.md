@@ -12,7 +12,7 @@ This provides a scalable solution to providing real time data analytics for medi
 ![Alt text](/MedaRedaArch.jpg?raw=true "MedaReda Architecture")
 
 
-##A video of an example working demo
+## A video of an example working demo
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=QW_b3DqW17M
 " target="_blank"><img src="http://img.youtube.com/vi/QW_b3DqW17M/0.jpg" 
