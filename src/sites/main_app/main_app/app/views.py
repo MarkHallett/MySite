@@ -37,42 +37,42 @@ def home_page():
 
 # These pages are  accessible to authenticated users (users that have logged in)
 @app.route('/user')
-@login_required  # Limits access to authenticated users
+#@login_required  # Limits access to authenticated users
 def user_page():
     return render_template('pages/user_page.html' )
 
 @app.route('/cv')
-@login_required  # Limits access to authenticated users
+#@login_required  # Limits access to authenticated users
 def cv_page():
     return render_template('pages/cv.html' )
 
 @app.route('/data_gbpusd')
-@login_required  # Limits access to authenticated users
+#@login_required  # Limits access to authenticated users
 def data_gbpusd_page():
     return render_template('pages/data_gbpusd.html' )
 
 @app.route('/todo')
-@login_required  # Limits access to authenticated users
+#@login_required  # Limits access to authenticated users
 def todo_page():
     return render_template('pages/todo.html' )
 
 @app.route('/medareda_wiki')
-@login_required  # Limits access to authenticated users
+#login_required  # Limits access to authenticated users
 def mr_wiki():
     return render_template('pages/mr_wiki.html' )
 
 @app.route('/mr_video')
-@login_required  # Limits access to authenticated users
+login_required  # Limits access to authenticated users
 def mr_video_page():
     return render_template('pages/mr_video_page.html' )
 
 @app.route('/medareda')
-@login_required  # Limits access to authenticated users
+login_required  # Limits access to authenticated users
 def medareda_page():
     return render_template('pages/medareda_page.html' )
 
 @app.route('/tech_used')
-@login_required  # Limits access to authenticated users
+login_required  # Limits access to authenticated users
 def tech_used_page():
     return render_template('pages/tech_used_page.html' )
 
