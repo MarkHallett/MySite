@@ -1,6 +1,6 @@
 # UPDATE 
 
-This project is being superseeded by 'pydagoras' which is build using React and FastAPI
+This project is being superseeded by 'pydagoras' which is built using React and FastAPI
 
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=37TwUk_D02c
