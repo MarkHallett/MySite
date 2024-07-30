@@ -1,4 +1,14 @@
+# UPDATE 
+This project is being superseeded by 'pydagoras' which is build using React and FastAPI
+
+<a href="http://www.youtube.com/watch?v=37TwUk_D02c
+" target="_blank"><img src="http://img.youtube.com/vi/QW_b3DqW17M/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="960" height="720" border="10" /></a>
+
+https://www.youtube.com/watch?v=37TwUk_D02c
+
 # MedaReda 
+
 ## Medium data Real time analyitics
 
 # MySite
@@ -8,8 +18,6 @@ Micro services hosted in Docker containers are used to get real time market data
 
 This provides a scalable solution to providing real time data analytics for medium data.
 
-## Working site
-www.markhallett.ltd
 
 ## MedaReda Architecture
 ![Alt text](/MedaRedaArch.jpg?raw=true "MedaReda Architecture")
